@@ -1,0 +1,18 @@
+{
+    "JJ":
+    [
+        {
+        "username":"JJ",
+        "password":"1234",
+        "pusbliser_topics":["JJ_Musica"],
+        "subscriber_topics":["jjs_MUSICA"]
+    }],
+    "jjs":
+    [
+        {
+        "username":"jjs",
+        "password":"1234",
+        "pusbliser_topics":["jjs_MUSICA"],
+        "subscriber_topics":["JJ_Musica"]
+    }]
+}
