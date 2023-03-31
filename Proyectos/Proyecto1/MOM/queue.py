@@ -2,7 +2,7 @@ class Queue:
     def __init__(self):
         # Creación de colas
         #para cada tópico una cola
-        self.topic_queue = Queue()
+        self.topic_queue = []
 
 
 #Determina si las colas están vacias (False) o no (True)
@@ -29,7 +29,7 @@ class Queue:
 #Agregar un mensaje a la cola especificada 
     def queue_add(self, message, times):
         for i in range(times):
-            self.topic_queue.enqueue(message)
+            self.enqueue(message,times)
 
 
 #esto es para coger un mensaje en particular de la cola y enviarlo a un usuario
