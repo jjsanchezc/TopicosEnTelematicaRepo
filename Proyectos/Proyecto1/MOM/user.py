@@ -5,7 +5,7 @@ class User:
     def __init__(self, username,password):
         self.user = username
         self.my_topics_pub = ['JJ_Musica']
-        self.py_topics_sub = []
+        self.my_topics_sub = []
         f=open("MOM/accounts.json","r")
         self.data=json.loads(f.read())
         self.password=password
