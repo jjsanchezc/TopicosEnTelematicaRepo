@@ -11,21 +11,22 @@ class MessageBroker:
         self.message=message
     
     class Exchange:
-        def __init__(self) -> None:
+        
+        #Methods for Topics
+        def create_topic(self,name):
             pass
         
-        #Publisher
-        def get_topics_pub(self):
+        def delete_topic(self,name):
             pass
         
-        def send_message(self,message):
-            pass
         
-        def add_topic(self,topic_name):
-            pass
-        
-        def delete_topic(self,topic_name):
-            pass
+        def publish_message(self,message,topic_name):
+            '''send message to queue
+
+            Args:
+                message (str): message to send
+                topic_name (str): topic name
+            '''
         
         
     

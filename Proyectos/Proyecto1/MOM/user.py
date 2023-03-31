@@ -1,23 +1,17 @@
 from topics import Topics
+from message_broker import MessageBroker
 import json
 
 class User:
-    def __init__(self, username,password):
+    def __init__(self, username,password=None):
         self.user = username
-        self.my_topics_pub = ['JJ_Musica']
-        self.my_topics_sub = []
-        f=open("MOM/accounts.json","r")
-        self.data=json.loads(f.read())
         self.password=password
-    
-    def __init__(self,username):
-        '''Esta clase es para poder hacer pruebas sin necesidad de iniciar sesion
-        '''   
-        self.user=username
         f=open("MOM/accounts.json","r")
         self.data=json.loads(f.read())
         self.my_topics_pub = self.data[self.user][0]["pusbliser_topics"]
-        self.py_topics_sub = self.data[self.user][0]["subscriber_topics"]
+        self.my_topics_sub = self.data[self.user][0]["subscriber_topics"]
+        self.message_broker=MessageBroker(self.my_topics_pub,self.my_topics_sub)
+    
     
     def is_valid(self):
         #por ahora dejar esta implementacion sencilla de usuario
