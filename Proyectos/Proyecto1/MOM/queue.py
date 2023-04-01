@@ -7,11 +7,9 @@ class MessageQueue:
         self.topic_queue = []
         self.dictionary={}
 
-
 #Determina si las colas están vacias (False) o no (True)
     def is_empty(self):
         return not bool(self.topic_queue)
-
 
 #Agrega un nuevo elemento a la cola y al diccionario para asignarle un valor por mensaje
     def enqueue(self, message, queue_back):
@@ -22,8 +20,6 @@ class MessageQueue:
         else:
             self.dictionary[message] = 1
         print(f"El mensaje {message} ha sido agregado")
-
-
 
 #elimina y devuelve con el pop el elemento de la cola
     def dequeue(self, message):

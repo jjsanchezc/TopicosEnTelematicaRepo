@@ -8,6 +8,8 @@ class Exchange:
         self.topics=Topics()
         self.message_queue=MessageQueue()
 
+
+
     #Methods for Topics
     def create_topic(self,name):
         pass

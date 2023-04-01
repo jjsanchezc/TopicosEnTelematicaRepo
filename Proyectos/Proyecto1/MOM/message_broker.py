@@ -6,7 +6,7 @@ username='JJ'
 class MessageBroker:
     def __init__(self,topic_name,message):
         self.exchange=self.Exchange()
-        self.queue=self.Queue()
+        self.message_queue=self.MessageQueue()
         self.topic_name=topic_name
         self.message=message
     
