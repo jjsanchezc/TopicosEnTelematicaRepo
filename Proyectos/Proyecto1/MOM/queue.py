@@ -62,6 +62,7 @@ def save_to_file(self, queue_back):
         json.dump(queue_data, f)
         print("Datos guardados en el archivo", queue_back)
 
+
 #acá se carga al programa los datos que se habian guardado en el json
 def load_from_file(self, queue_back):
         with open(queue_back, 'r') as f:
