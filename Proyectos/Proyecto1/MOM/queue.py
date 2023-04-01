@@ -1,4 +1,4 @@
-class Queue:
+class MessageQueue:
     def __init__(self):
         # Creación de colas
         #para cada tópico una cola
@@ -11,7 +11,7 @@ class Queue:
 
 
 #Agrega un nuevo elemento a la cola
-    def enqueue(self, message, times):
+    def enqueue(self, message, times=None):
         self.topic_queue.append(message)
         print(f"El elemento {message} ha sido agregado {times} veces a la cola.")
 

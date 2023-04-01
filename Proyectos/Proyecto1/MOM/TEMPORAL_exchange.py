@@ -1,20 +1,23 @@
 from topics import Topics
+from queue import Queue
 class Exchange:
-    def __init__(self,name):
-        self.name=name
+    def __init__(self,publisher_topic_list,subscriber_topic_list):
+        self.pub_topic_list=publisher_topic_list
+        self.sub_topic_list=subscriber_topic_list
+        self.topics=Topics()
+    #Methods for Topics
+    def create_topic(self,name):
+        pass
     
-    def set_name(self,name):
-        '''setter del nombre del exchange
+    def delete_topic(self,name):
+        pass
+    
+    
+    def publish_message(self,message,topic_name):
+        '''send message to queue
+
         Args:
-            name (_type_): _description_
-        '''   
-        self.name=name
-    def binding(self):
-        '''las reglas de enrutamiento que se utilizan para enviar los mensajes entrantes a las colas
-        de mensajes adecuadas. Cada binding está asociado con una clave de enrutamiento,
-        que se utiliza para determinar a qué colas de mensajes se deben enviar los mensajes entrantes.
-        Las claves de enrutamiento son expresiones de tema que describen el patrón de coincidencia de temas que se utiliza para enrutar los mensajes a las colas de mensajes adecuadas. 
-        '''   
-        pass
-    def routing_key(self):
-        pass
+            message (str): message to send
+            topic_name (str): topic name
+        '''
+        

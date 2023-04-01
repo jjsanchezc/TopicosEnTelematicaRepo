@@ -12,7 +12,16 @@
         {
         "username":"jjs",
         "password":"1234",
-        "pusbliser_topics":["jjs_MUSICA"],
+        "pusbliser_topics":[],
+        "subscriber_topics":["JJ_Musica"]
+    }],
+    "Prueba1":
+    [
+        {
+        "username":"jjs",
+        "password":"1234",
+        "pusbliser_topics":[],
         "subscriber_topics":["JJ_Musica"]
     }]
+
 }
