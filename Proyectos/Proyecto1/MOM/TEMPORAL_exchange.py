@@ -6,6 +6,8 @@ class Exchange:
         self.sub_topic_list=subscriber_topic_list
         self.topic_name=topic_name
         self.topics=Topics()
+        self.message_queue=MessageQueue()
+
     #Methods for Topics
     def create_topic(self,name):
         pass
