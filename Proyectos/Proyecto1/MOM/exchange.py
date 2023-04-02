@@ -1,3 +1,4 @@
+import json
 from topics import Topics
 from message_queue import MessageQueue
 class Exchange:
@@ -19,22 +20,32 @@ class Exchange:
         return name_list
     
     def create_topic(self,username,topic_name):
+        with open('accounts.json') as f:
+            data = json.load(f)
+        
         name=username+"_"+topic_name
-        Topics(name)
-        self.pub_topic_name_list.append(name)
+        new_topic=Topics(name)
+        
         if name in self.pub_topic_name_list:
             #no se hace nada porque ya existe
             return False
-        #deberia sobreescribir el json
+        self.pub_topic_name_list.append(name)
+        data[username][0]["publisher_topics"].append(new_topic)
+        with open('accounts.json', 'w') as f:
+            json.dump(data, f)
         return True
     
-    def delete_topic(self,name):
+    def delete_topic(self,username,name)->bool:
+        with open('accounts.json') as f:
+            data = json.load(f)
         if name in self.pub_topic_name_list:
             #abrir el json y sobreescribir
-            pass
-        else:
-            #topico no existe
-            pass
+            data[username][0]["publisher_topics"].remove(name)
+            with open('accounts.json', 'w') as f:
+                json.dump(data, f)
+            return True
+        #topico no existe
+        return False
     
     
     def publish_message(self,message,topic_name):
