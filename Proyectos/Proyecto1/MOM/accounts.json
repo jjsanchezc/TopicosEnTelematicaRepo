@@ -50,7 +50,7 @@
             "role": "subscriber",
             "publisher_topics": [],
             "subscriber_topics": [
-                "topic3"
+                "majo_topic3"
             ]
         }
     ],
@@ -60,7 +60,7 @@
             "password": "dd041ff70fb948ec307d6694130596588b26e821c5591d2144578d326e8fa1eb",
             "role": "publisher",
             "publisher_topics": [
-                "topic0"
+                "majo1_topic0"
             ],
             "subscriber_topics": []
         }
@@ -70,10 +70,10 @@
             "username": "majo2",
             "password": "1444",
             "publisher_topics": [
-                "topic2"
+                "majo2_topic2"
             ],
             "subscriber_topics": [
-                "topic3"
+                "majo_topic3"
             ]
         }
     ],
@@ -82,7 +82,7 @@
             "username": "majo4",
             "password": "1222",
             "publisher_topics": [
-                "topic4"
+                "majo4_topic4"
             ],
             "subscriber_topics": [
                 ""
@@ -95,7 +95,7 @@
             "password": "1111",
             "role": "publisher",
             "publisher_topics": [
-                "topic8"
+                "majo3_topic8"
             ],
             "subscriber_topics": [
                 ""
@@ -108,7 +108,7 @@
             "password": "4444",
             "role": "publisher",
             "publisher_topics": [
-                "topic9"
+                "mjo_topic9"
             ],
             "subscriber_topics": []
         }
@@ -119,7 +119,7 @@
             "password": "5555",
             "role": "publisher",
             "publisher_topics": [
-                "topic9"
+                "mJO_topic9"
             ],
             "subscriber_topics": []
         }
