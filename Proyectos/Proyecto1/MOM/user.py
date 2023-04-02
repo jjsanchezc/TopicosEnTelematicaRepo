@@ -1,6 +1,7 @@
 from topics import Topics
 from message_broker import MessageBroker
 import json
+import requests
 
 class User:
     def __init__(self, username, password, role, publisher_topics=None, subscriber_topics=None):
@@ -18,6 +19,9 @@ class User:
             self.publisher_topics = publisher_topics or []
             self.subscriber_topics = subscriber_topics or []
         self.accounts_file_path = "accounts.json"
+        self.session_id = None
+        self.server_url = "https://example.com"  # replace with actual server URL
+
 
 #Validacion del usuario
     def is_valid(self):
@@ -85,6 +89,46 @@ class User:
         else:
             return False
 
+    # establish a connection TO THE SERVER
+    def connect(self):
+        # send a POST request to the server to establish a connection
+        response = requests.post(
+            f"{self.server_url}/connect",
+            json={
+                "username": self.username,
+                "password": self.password,
+                "role": self.role,
+                "publisher_topics": self.publisher_topics,
+                "subscriber_topics": self.subscriber_topics,
+            }
+        )
+        if response.status_code == 200:
+            # connection successful, store the session ID
+            self.session_id = response.json()["session_id"]
+        else:
+            # connection failed, raise an exception
+            raise ConnectionError("Failed to establish connection to server")
+
+    def disconnect(self):
+        if self.session_id is not None:
+            # send a DELETE request to the server to terminate the connection
+            response = requests.delete(
+                f"{self.server_url}/disconnect",
+                headers={
+                    "Authorization": f"Bearer {self.session_id}"
+                }
+            )
+            if response.status_code == 200:
+                # disconnection successful, clear the session ID
+                self.session_id = None
+            else:
+                # disconnection failed, raise an exception
+                raise ConnectionError("Failed to disconnect from server")
+        else:
+            # no session ID stored, cannot disconnect
+            raise ConnectionError("Not currently connected to server")
+        
+    
 # Pregunta en consola al usuario los sig parametros 
 username = input("Enter username: ")
 password = input("Enter password: ")
@@ -112,6 +156,7 @@ assert accounts[username][0]["publisher_topics"] == publisher_topics
 assert accounts[username][0]["subscriber_topics"] == subscriber_topics
 
 print("User registration test passed successfully!")
+
 
 
 '''class User:

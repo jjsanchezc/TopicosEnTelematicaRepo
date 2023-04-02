@@ -1,7 +1,9 @@
-from flask import Flask, jsonify, redirect, request
+from flask import Flask, jsonify, redirect, request, session
 from user import User
 import json
+
 app = Flask(__name__)
+app.secret_key = 'your_secret_key'
 
 messages_queue = []
 
@@ -16,17 +18,29 @@ def home_login():
     '''  
     username=request.json['username']
     password=request.json['password']
-    role=request.json['role']
-    user=User(username,password,role)
+    # Validate the user's credentials
+    user=User(username,password)
     if user.is_valid():
+        session['username'] = username
+        session['role'] = user.role
+        return redirect("/menu")
+    else:
+        return jsonify({"mensaje": 'Credenciales incorrectas'})
+    '''if user.is_valid():
         jsonify({"mensaje":'cuenta valida'})
         return redirect("/menu")
-    return jsonify({"mensaje":'incorrecto'})
+    return jsonify({"mensaje":'incorrecto'})'''
+
 
 #hay que editar este ya que en user.py ya se decide el rol
 @app.route('/menu', methods=['GET'])
 def menu():
+    '''if 'username' in session:
+        return 'Hola, decide que quieres ser'
+    else:
+        return redirect('/login')'''
     return 'hola, decide que quieres ser'
+
 @app.route('/menu', methods=['POST'])
 def menu_choice():
     choice=request.json["role"]
@@ -42,7 +56,6 @@ def menu_choice():
         return redirect("/menu/publisher")
     else:
         return redirect("/menu")
-
 
 #PUBLISHER
 @app.route('/menu/publisher', methods=['GET'])
