@@ -1,27 +1,127 @@
 {
-    "JJ":
-    [
+    "JJ": [
         {
-        "username":"JJ",
-        "password":"1234",
-        "pusbliser_topics":["JJ_Musica"],
-        "subscriber_topics":["jjs_MUSICA"]
-    }],
-    "jjs":
-    [
+            "username": "JJ",
+            "password": "1234",
+            "pusbliser_topics": [
+                "JJ_Musica"
+            ],
+            "subscriber_topics": [
+                "jjs_MUSICA"
+            ]
+        }
+    ],
+    "jjs": [
         {
-        "username":"jjs",
-        "password":"1234",
-        "pusbliser_topics":[],
-        "subscriber_topics":["JJ_Musica"]
-    }],
-    "Prueba1":
-    [
+            "username": "jjs",
+            "password": "1234",
+            "pusbliser_topics": [],
+            "subscriber_topics": [
+                "JJ_Musica"
+            ]
+        }
+    ],
+    "Prueba1": [
         {
-        "username":"jjs",
-        "password":"1234",
-        "pusbliser_topics":[],
-        "subscriber_topics":["JJ_Musica"]
-    }]
-
+            "username": "jjs",
+            "password": "1234",
+            "pusbliser_topics": [],
+            "subscriber_topics": [
+                "JJ_Musica"
+            ]
+        }
+    ],
+    "testuser": [
+        {
+            "username": "testuser",
+            "password": "1234",
+            "publisher_topics": [
+                "topic1"
+            ],
+            "subscriber_topics": [
+                "topic2"
+            ]
+        }
+    ],
+    "majo": [
+        {
+            "username": "majo",
+            "password": "kss",
+            "role": "subscriber",
+            "publisher_topics": [],
+            "subscriber_topics": [
+                "topic3"
+            ]
+        }
+    ],
+    "majo1": [
+        {
+            "username": "majo1",
+            "password": "dd041ff70fb948ec307d6694130596588b26e821c5591d2144578d326e8fa1eb",
+            "role": "publisher",
+            "publisher_topics": [
+                "topic0"
+            ],
+            "subscriber_topics": []
+        }
+    ],
+    "majo2": [
+        {
+            "username": "majo2",
+            "password": "1444",
+            "publisher_topics": [
+                "topic2"
+            ],
+            "subscriber_topics": [
+                "topic3"
+            ]
+        }
+    ],
+    "majo4": [
+        {
+            "username": "majo4",
+            "password": "1222",
+            "publisher_topics": [
+                "topic4"
+            ],
+            "subscriber_topics": [
+                ""
+            ]
+        }
+    ],
+    "majo3": [
+        {
+            "username": "majo3",
+            "password": "1111",
+            "role": "publisher",
+            "publisher_topics": [
+                "topic8"
+            ],
+            "subscriber_topics": [
+                ""
+            ]
+        }
+    ],
+    "mjo": [
+        {
+            "username": "mjo",
+            "password": "4444",
+            "role": "publisher",
+            "publisher_topics": [
+                "topic9"
+            ],
+            "subscriber_topics": []
+        }
+    ],
+    "mJO": [
+        {
+            "username": "mJO",
+            "password": "5555",
+            "role": "publisher",
+            "publisher_topics": [
+                "topic9"
+            ],
+            "subscriber_topics": []
+        }
+    ]
 }

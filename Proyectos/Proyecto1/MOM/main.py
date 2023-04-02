@@ -14,30 +14,34 @@ def home_login():
     Returns:
         returns the "page" where the user will select if they want to be publisher or subscriber
     '''  
-    
     username=request.json['username']
     password=request.json['password']
-    user=User(username,password)
+    role=request.json['role']
+    user=User(username,password,role)
     if user.is_valid():
         jsonify({"mensaje":'cuenta valida'})
         return redirect("/menu")
     return jsonify({"mensaje":'incorrecto'})
 
+#hay que editar este ya que en user.py ya se decide el rol
 @app.route('/menu', methods=['GET'])
 def menu():
     return 'hola, decide que quieres ser'
 @app.route('/menu', methods=['POST'])
 def menu_choice():
-    choice=request.json["opcion"]
+    choice=request.json["role"]
     print(choice)
-    if choice=="1":
+    if choice=="publisher":
         return redirect("/menu/publisher")
-    elif choice=='2':
+    #crear subscriber menu y para ambos
+    elif choice=='subscriber':
         #go to subscriber
+        return redirect("/menu/publisher")
+    elif choice=='publisher-subscriber':
+        #go to both
         return redirect("/menu/publisher")
     else:
         return redirect("/menu")
-
 
 
 #PUBLISHER
