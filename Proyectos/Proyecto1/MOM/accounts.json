@@ -3,7 +3,7 @@
         {
             "username": "JJ",
             "password": "1234",
-            "pusbliser_topics": [
+            "publisher_topics": [
                 "JJ_Musica"
             ],
             "subscriber_topics": [
@@ -15,7 +15,7 @@
         {
             "username": "jjs",
             "password": "1234",
-            "pusbliser_topics": [],
+            "publisher_topics": [],
             "subscriber_topics": [
                 "JJ_Musica"
             ]
@@ -25,7 +25,7 @@
         {
             "username": "jjs",
             "password": "1234",
-            "pusbliser_topics": [],
+            "publisher_topics": [],
             "subscriber_topics": [
                 "JJ_Musica"
             ]
