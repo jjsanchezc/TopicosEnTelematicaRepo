@@ -1,13 +1,14 @@
-from flask import Flask, jsonify, redirect, request, session
-from user import User
+from flask import Flask, render_template, request, redirect, jsonify, session
 import json
+from user import User
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'
+app.secret_key = b'secret_key'
 
-messages_queue = []
+@app.route('/')
+def home():
+    return render_template('home.html')
 
-#MENU INICIAL
 
 @app.route('/login', methods=['POST'])
 def home_login():
@@ -18,8 +19,10 @@ def home_login():
     '''  
     username=request.json['username']
     password=request.json['password']
+    role=request.json['role']
     # Validate the user's credentials
-    user=User(username,password)
+    #user=User(username,password)
+    user = User(username, password, role)
     if user.is_valid():
         session['username'] = username
         session['role'] = user.role
@@ -31,19 +34,19 @@ def home_login():
         return redirect("/menu")
     return jsonify({"mensaje":'incorrecto'})'''
 
-
 #hay que editar este ya que en user.py ya se decide el rol
 @app.route('/menu', methods=['GET'])
 def menu():
-    '''if 'username' in session:
+    if 'username' in session:
+        #ya entró ahora debe aparecer el menu del rol segun si es publicador o suscriptor o ambos
         return 'Hola, decide que quieres ser'
     else:
-        return redirect('/login')'''
-    return 'hola, decide que quieres ser'
+        return redirect('/login')
+'''    return 'hola, decide que quieres ser'''
 
 @app.route('/menu', methods=['POST'])
 def menu_choice():
-    choice=request.json["role"]
+    choice=session.get['role']
     print(choice)
     if choice=="publisher":
         return redirect("/menu/publisher")
@@ -60,11 +63,12 @@ def menu_choice():
 #PUBLISHER
 @app.route('/menu/publisher', methods=['GET'])
 def menu_publisher():
-    return jsonify({"mensaje":'hola, decide que quieres ser',
+    return jsonify({"mensaje":'hola, decide que quieres hacer',
                     "opcion 1":"ver mis topicos",
                     "opcion 2":"añadir topicos",
                     "opcion 3":"eliminar topicos",
                     "opcion 4":"Enviar topicos"})
+
 @app.route('/menu/publisher', methods=['POST'])
 def menu_publisher_choice():
     choice=request
@@ -103,14 +107,13 @@ def send_message(topic_name):
 
 
 
+
 #despues va a pasar a la clase de message_broker
 def add_queue(mensaje):
     messages_queue.append(mensaje)
 
 
-
-
-user=User("JJ")
+#user=User("JJ")
 
 # Ruta para recibir un mensaje
 @app.route('/mensaje', methods=['GET'])
@@ -122,9 +125,5 @@ def recibir_mensaje():
         return jsonify({'mensaje': mensaje})
 
 
-
-
-
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)

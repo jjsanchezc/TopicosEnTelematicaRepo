@@ -46,21 +46,21 @@
     "majo": [
         {
             "username": "majo",
-            "password": "kss",
+            "password": "1234",
             "role": "subscriber",
             "publisher_topics": [],
             "subscriber_topics": [
-                "majo_topic3"
+                "jk"
             ]
         }
     ],
     "majo1": [
         {
             "username": "majo1",
-            "password": "wjs",
+            "password": "1234",
             "role": "publisher",
             "publisher_topics": [
-                "majo1_topic0"
+                "topic"
             ],
             "subscriber_topics": []
         }
@@ -68,12 +68,11 @@
     "majo2": [
         {
             "username": "majo2",
-            "password": "1444",
-            "publisher_topics": [
-                "majo2_topic2"
-            ],
+            "password": "kosjd",
+            "role": "subscriber",
+            "publisher_topics": [],
             "subscriber_topics": [
-                "majo_topic3"
+                "topic"
             ]
         }
     ],
@@ -92,14 +91,10 @@
     "majo3": [
         {
             "username": "majo3",
-            "password": "1111",
-            "role": "publisher",
-            "publisher_topics": [
-                "majo3_topic8"
-            ],
-            "subscriber_topics": [
-                ""
-            ]
+            "password": "majos",
+            "role": "publisher-subscriber",
+            "publisher_topics": [],
+            "subscriber_topics": []
         }
     ],
     "mjo": [
@@ -120,6 +115,50 @@
             "role": "publisher",
             "publisher_topics": [
                 "mJO_topic9"
+            ],
+            "subscriber_topics": []
+        }
+    ],
+    "mjao": [
+        {
+            "username": "mjao",
+            "password": "1234",
+            "role": "publisher",
+            "publisher_topics": [
+                "topic9"
+            ],
+            "subscriber_topics": []
+        }
+    ],
+    "": [
+        {
+            "username": "",
+            "password": "1111",
+            "role": "publisher",
+            "publisher_topics": [
+                "topic"
+            ],
+            "subscriber_topics": []
+        }
+    ],
+    "majo1234": [
+        {
+            "username": "majo1234",
+            "password": "1234",
+            "role": "publisher",
+            "publisher_topics": [
+                "topicc"
+            ],
+            "subscriber_topics": []
+        }
+    ],
+    "MAJO": [
+        {
+            "username": "MAJO",
+            "password": "1234",
+            "role": "publisher",
+            "publisher_topics": [
+                "lkd"
             ],
             "subscriber_topics": []
         }
