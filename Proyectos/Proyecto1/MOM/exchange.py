@@ -48,6 +48,7 @@ class Exchange:
         return False
     
     
+    #METHODS FOR PUBLISHERS
     def publish_message(self,message,topic_name):
         '''send message to queue
 
@@ -56,3 +57,7 @@ class Exchange:
             topic_name (str): topic name
         '''
         self.topics.add_message(message,topic_name)
+        
+    #METHODS FOR SUBSCRIBERS
+    def get_messages(self,topic_name):
+        return self.topics.get_messages_from_topic(topic_name)
