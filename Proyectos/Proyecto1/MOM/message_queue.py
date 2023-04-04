@@ -12,14 +12,14 @@ class MessageQueue:
         return not bool(self.topic_queue)
 
 #Agrega un nuevo elemento a la cola y al diccionario para asignarle un valor por mensaje
-    def enqueue(self, message,topic_name,queue_back):
+    def enqueue(self, message,topic_name):
         self.topic_queue.append(message)
-        self.save_to_file(queue_back)
+        self.save_to_file("message_queue.json")
         if message in self.dictionary:
             self.dictionary[topic_name].append(message)
         else:
             self.dictionary[topic_name] = [message]
-        print(f"El mensaje {message} ha sido agregado")
+        print(f"El mensaje: {message} ha sido agregado")
 
 #elimina y devuelve con el pop el elemento de la cola
     def dequeue(self, message):
@@ -30,6 +30,11 @@ class MessageQueue:
     def display(self):
         print(self.topic_queue)
 
+#metodo para recibir los mensajes de una cola
+def get_messages_from_topic(self,topic_name):
+    with open('message_queue.json') as f:
+        data = json.load(f)
+    return data[topic_name]
 #esto es para coger un mensaje en particular de la cola y enviarlo a un usuario
     def get_message(self, position):
         if position < 0 or position >= len(self.topic_queue):
