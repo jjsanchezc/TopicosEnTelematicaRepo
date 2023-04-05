@@ -1,5 +1,6 @@
 from message_queue import MessageQueue
 
+
 class Topics:
     def __init__(self,name=None):
         self.name=name
