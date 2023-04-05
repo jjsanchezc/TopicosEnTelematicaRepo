@@ -5,7 +5,6 @@ from exchange import Exchange
 messages_queue = []
 username='JJ'   
 
-
 class MessageBroker:
     def __init__(self,topic_name,message):
         #self.exchange=Exchange()
