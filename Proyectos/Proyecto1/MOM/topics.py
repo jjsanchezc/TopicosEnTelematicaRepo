@@ -1,5 +1,6 @@
 from message_queue import MessageQueue
 
+
 class Topics:
     def __init__(self,name=None):
         self.name=name
@@ -14,5 +15,5 @@ class Topics:
     
     def add_message(self,message,topic_name):
         print('envio el mensaje del topico a la cola')
-        self.message_queue.enqueue(message,topic_name,"accounts.json")
+        self.message_queue.enqueue(message,topic_name)
         return str(f'mensaje para todos los subscriptores de {self.name}')

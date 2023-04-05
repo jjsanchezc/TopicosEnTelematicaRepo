@@ -60,4 +60,4 @@ class Exchange:
         
     #METHODS FOR SUBSCRIBERS
     def get_messages(self,topic_name):
-        return self.topics.get_messages_from_topic(topic_name)
+        return self.topics.message_queue.get_messages_from_topic(topic_name)
