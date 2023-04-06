@@ -13,7 +13,7 @@ class MessageQueue:
 #Agrega un nuevo elemento a la cola y al diccionario para asignarle un valor por mensaje
     def enqueue(self, message,topic_name):
         #buscar otro metodo para agregar en un diccionario
-        self.dictionary.append(message)
+        #self.dictionary.append(message)
         if message in self.dictionary:
             self.dictionary[topic_name].append(message)
         else:
@@ -31,17 +31,26 @@ class MessageQueue:
         print(self.dictionary)
 
 #metodo para recibir los mensajes de una cola
-def get_messages_from_topic(self,topic_name):
-    with open('message_queue.json') as f:
-        data = json.load(f)
-    return data[topic_name]
+    def get_messages_from_topic(self,topic_name):
+        with open('message_queue.json') as f:
+            data = json.load(f)
+        return data[topic_name]
 
+#esto es para coger un mensaje en particular de la cola y enviarlo a un usuario
+    '''PAULI REVISA ESTO
+    def get_message(self, position):
+        if position < 0 or position >= len(self.topic_queue):
+            raise IndexError("Index out of range")
+        return self.topic_queue[position]
+    '''
 #el usuario solicita el mensaje de la cola de su interes 
     def message_request(self, dictionary, position):
         if dictionary.is_empty():
             return "La cola está vacía"
         # Obtener el elemento de la cola en x posición
-        message = self.get_message(position)
+        #Revisa la lista 52
+        #message = self.get_message(position)
+        message='a'
         dictionary.dequeue(message)
         return message
     
