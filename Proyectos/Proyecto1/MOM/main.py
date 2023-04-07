@@ -94,7 +94,7 @@ def menu_publisher_choice():
 
 @app.route('/menu/publisher/topics/add_topic/', methods=['POST'])
 def add_topic(topic_name):
-    
+    #cambiamos esto por un json?
     topic_name=request.json['topic_name']
     if exchange.create_topic(username,topic_name):
         exchange.get_name_pub_topic_list()
