@@ -2,11 +2,10 @@ import json
 from topics import Topics
 from message_queue import MessageQueue
 class Exchange:
-    def __init__(self,publisher_topic_list,subscriber_topic_list,topic_name):
+    def __init__(self,publisher_topic_list=None,subscriber_topic_list=None):
         self.pub_topic_list=publisher_topic_list
         self.pub_topic_name_list=self.get_name_pub_topic_list()
         self.sub_topic_name_list=subscriber_topic_list
-        self.topic_name=topic_name
         self.topics=Topics()
         self.message_queue=MessageQueue()
 
@@ -15,8 +14,18 @@ class Exchange:
     #Methods for Topics
     def get_name_pub_topic_list(self):
         name_list=[]
-        for topic in self.pub_topic_list:
-            name_list.append(topic.get_name())
+        #for topic in self.pub_topic_list():
+        for topic in self.pub_topic_name_list():
+            #name_list.append(topic.get_name())
+            name_list.append()
+        return name_list
+    
+    def get_name_sub_topic_list(self):
+        name_list=[]
+        #for topic in self.sub_topic_list():
+        for topic in self.sub_topic_name_list():
+            #name_list.append(topic.get_name())
+            name_list.append()
         return name_list
     
     def create_topic(self,username,topic_name):
