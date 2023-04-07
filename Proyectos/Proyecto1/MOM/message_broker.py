@@ -6,8 +6,6 @@ messages_queue = []
 username='JJ'   
 
 class MessageBroker:
-    def __init__(self,topic_name,message,publisher_topic_list,subscriber_topic_list):
-        super().__init__(publisher_topic_list,subscriber_topic_list,topic_name)
+    def __init__(self,publisher_topic_list,subscriber_topic_list):
+        exchange=Exchange(publisher_topic_list,subscriber_topic_list)
         self.message_queue=MessageQueue()
-        self.topic_name=topic_name
-        self.message=message

@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, jsonify, session
 import json
 from user import User
+from message_broker import MessageBroker
+from exchange import Exchange
 
 app = Flask(__name__)
 app.secret_key = b'secret_key'
@@ -9,9 +11,9 @@ app.secret_key = b'secret_key'
 def home():
     return render_template('home.html')
 
-
 @app.route('/login', methods=['POST'])
 def home_login():
+    global message_broker,exchange, username
     '''home page, where the user will log in
 
     Returns:
@@ -24,8 +26,12 @@ def home_login():
     #user=User(username,password)
     user = User(username, password, role)
     if user.is_valid():
+        publisher_topics,subscriber_topics=get_topics(username)
         session['username'] = username
         session['role'] = user.role
+        message_broker=MessageBroker(publisher_topics,subscriber_topics)
+        exchange=Exchange(publisher_topics,subscriber_topics)
+        
         return redirect("/menu")
     else:
         return jsonify({"mensaje": 'Credenciales incorrectas'})
@@ -61,6 +67,9 @@ def menu_choice():
         return redirect("/menu")
 
 #PUBLISHER
+message_broker=''
+excahnge=''
+username=''
 @app.route('/menu/publisher', methods=['GET'])
 def menu_publisher():
     return jsonify({"mensaje":'hola, decide que quieres hacer',
@@ -81,49 +90,49 @@ def menu_publisher_choice():
     else:
         return redirect("/menu")
 
+
+
 @app.route('/menu/publisher/topics/add_topic/', methods=['POST'])
-def add_topic():
+def add_topic(topic_name):
+    
     topic_name=request.json['topic_name']
-    if user.add_topic_pub(topic_name):
-        user.see_my_topics_pub()
+    if exchange.create_topic(username,topic_name):
+        exchange.get_name_pub_topic_list()
         return jsonify({"message":"topico creado con exito"})
-    user.see_my_topics_pub()
+    exchange.get_name_pub_topic_list()
     return jsonify({'message':'error al crear el topico'})
 
 @app.route('/menu/publisher/topics', methods=['GET'])
 def see_topics():
-    return user.see_my_topics_pub()
+    return exchange.get_name_pub_topic_list()
 
 
 @app.route('/menu/publisher/message/<topic_name>', methods=['POST'])
 def send_message(topic_name):
-    if user.send_message(topic_name) is False:
+    message=input('mensaje a mandar')
+    exchange.publish_message(message,topic_name)
+    '''if user.send_message(topic_name) is False:
         return jsonify({'mensaje': 'Error al enviar, topico no existe','a': str(user.my_topics_pub)})
     else:
         message=request.json['mensaje']
         add_queue(message)
         
-        return jsonify({'mensaje': 'Mensaje enviado correctamente para los subscriptores de '+topic_name})
+        return jsonify({'mensaje': 'Mensaje enviado correctamente para los subscriptores de '+topic_name})'''
 
-
-
-
-#despues va a pasar a la clase de message_broker
-def add_queue(mensaje):
-    messages_queue.append(mensaje)
-
-
-#user=User("JJ")
 
 # Ruta para recibir un mensaje
 @app.route('/mensaje', methods=['GET'])
 def recibir_mensaje():
-    if len(messages_queue) == 0:
-        return jsonify({'mensaje': 'No hay mensajes'})
-    else:
-        mensaje = messages_queue.pop(0)
-        return jsonify({'mensaje': mensaje})
+    print(exchange.get_name_sub_topic_list())
+    topic_name=input('de cual topico quieres buscar mensajes')
+    exchange.get_messages(topic_name)
 
 
+def get_topics(username):
+    f=open("MOM/accounts.json","r")
+    data=json.loads(f.read())
+    publisher_topics_list = data[username][0]["pusbliser_topics"]
+    subscriber_topics_list =data[username][0]["subscriber_topics"]
+    return publisher_topics_list,subscriber_topics_list
 if __name__ == '__main__':
     app.run(debug=False)
