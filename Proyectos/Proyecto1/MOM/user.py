@@ -91,14 +91,14 @@ class User:
 # Pregunta en consola al usuario los sig parametros 
 username = input("Enter username: ")
 password = input("Enter password: ")
-role = input("Enter your role (publisher, subscriber, or publisher-suscriber): ")
+role = input("Enter your role (publisher, subscriber, or publisher-subscriber): ")
 
-if role == "publisher" or role == "publisher-suscriber":
+if role == "publisher" or role == "publisher-subscriber":
     publisher_topics = input("Enter publisher topics (use comma): ").split(",")
 else:
     publisher_topics = []
 
-if role == "subscriber" or role == "publisher-suscriber":
+if role == "subscriber" or role == "publisher-subscriber":
     subscriber_topics = input("Enter subscriber topics (use comma): ").split(",")
 else:
     subscriber_topics = []
