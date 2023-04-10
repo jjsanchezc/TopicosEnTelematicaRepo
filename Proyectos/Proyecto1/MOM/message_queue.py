@@ -21,7 +21,6 @@ class MessageQueue:
             self.dictionary[topic_name].append(message)
         else:
             self.dictionary[topic_name]=[message]
-        #print(f"El mensaje: {message} ha sido agregado..... {str(self.dictionary[0])}")
         self.save_to_file("MOM/message_queue.json")
         
         print(f"El mensaje: {message} ha sido agregado..... {str(self.dictionary[0])}")
@@ -37,35 +36,47 @@ class MessageQueue:
 
 #metodo para recibir los mensajes de un diccionario en general
     def get_messages_from_topic(self,topic_name):
-        with open('message_queue.json') as f:
+        with open('MOM/message_queue.json') as f:
             data = json.load(f)
-        return data[topic_name]
+        try:
+            return data[topic_name]
+        except:
+            return "No eres subscriptor o no existe el topico"
 
 
 #el usuario solicita el mensaje del diccionario en la posición 0 de la llave de cada usuario
     def message_request(self, dictionary):
         if dictionary.is_empty():
             return "La cola está vacía"
-        with open('message_queue.json') as f:
+        with open('MOM/message_queue.json') as f:
             data = json.load(f)
 #cambiar por el nombre del tópico
             message= data.get(dictionary.message_queue[0], '')
         dictionary.dequeue(message)
-        self.save_to_file('queue_back.json')
+        self.save_to_file('MOM/message_queue.json')
         return message
     
 #para términos de persistencia se guardarán los datos en un .json
+<<<<<<< HEAD
     def save_to_file(self, queue_back):
         #se crea otro diccionario para guardar los datos que tiene la cola y el diccionario 
         queue_data = {'queues': self.dictionary, 'dictionary': self.dictionary}
         with open(queue_back, 'w') as f:
             json.dump(queue_data, f,indent=4)
             print("Datos guardados en el archivo", queue_back)
+=======
+    def save_to_file(self):
+        #se crea otro diccionario para guardar los datos que tiene la cola y el diccionario 
+        with open('MOM/message_queue.json', 'w') as f:
+            data = json.load(f)
+            json.dump(data, f,indent=4)
+            print("Datos guardados en el archivo")
+>>>>>>> 8ea5a579b54c86d2c3feb1dbb7617c110acd85d8
 
 
 #acá se carga al programa los datos que se habian guardado en el json
-    def load_from_file(self, queue_back):
-            with open(queue_back, 'r') as f:
+    def load_from_file(self):
+            with open('MOM/message_queue.json', 'r') as f:
                 self.dictionary= json.load(f)
-            print("Datos cargados del archivo", queue_back)
+            print("Datos cargados del archivo")
 
