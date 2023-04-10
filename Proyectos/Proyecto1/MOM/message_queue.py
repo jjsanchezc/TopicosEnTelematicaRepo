@@ -57,21 +57,12 @@ class MessageQueue:
         return message
     
 #para términos de persistencia se guardarán los datos en un .json
-<<<<<<< HEAD
-    def save_to_file(self, queue_back):
-        #se crea otro diccionario para guardar los datos que tiene la cola y el diccionario 
-        queue_data = {'queues': self.dictionary, 'dictionary': self.dictionary}
-        with open(queue_back, 'w') as f:
-            json.dump(queue_data, f,indent=4)
-            print("Datos guardados en el archivo", queue_back)
-=======
     def save_to_file(self):
         #se crea otro diccionario para guardar los datos que tiene la cola y el diccionario 
         with open('MOM/message_queue.json', 'w') as f:
             data = json.load(f)
             json.dump(data, f,indent=4)
             print("Datos guardados en el archivo")
->>>>>>> 8ea5a579b54c86d2c3feb1dbb7617c110acd85d8
 
 
 #acá se carga al programa los datos que se habian guardado en el json
