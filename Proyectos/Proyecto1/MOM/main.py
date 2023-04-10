@@ -119,7 +119,12 @@ def add_topic():
 
 
 @app.route('/menu/publisher/topics', methods=['GET'])
-def see_topics():
+def see_topics_pub():
+    # PRUEBA
+    username = "JJ"
+    publisher_topics, subscriber_topics = get_topics(username)
+    exchange = Exchange(publisher_topics, subscriber_topics)
+    #FIN PRUEBA
     return exchange.get_name_pub_topic_list()
 
 
