@@ -53,7 +53,7 @@ class MessageQueue:
 #cambiar por el nombre del tópico
             message= data.get(dictionary.message_queue[0], '')
         dictionary.dequeue(message)
-        self.save_to_file('MOM/message_queue.json')
+        self.save_to_file()
         return message
     
 #para términos de persistencia se guardarán los datos en un .json
