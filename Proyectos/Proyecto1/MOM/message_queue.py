@@ -10,10 +10,8 @@ class MessageQueue:
     def is_empty(self):
         return not bool(self.dictionary)
 
-#Agrega un nuevo elemento a la cola y al diccionario para asignarle un valor por mensaje
-    def enqueue(self, message,topic_name):
-        #buscar otro metodo para agregar en un diccionario
-        #self.dictionary.append(message)
+#Agrega un nuevo elemento al diccionario para asignarle un valor por mensaje
+    def enqueue(self, message, topic_name):
         if message in self.dictionary:
             self.dictionary[topic_name].append(message)
         else:
@@ -30,44 +28,35 @@ class MessageQueue:
     def display(self):
         print(self.dictionary)
 
-#metodo para recibir los mensajes de una cola
+#metodo para recibir los mensajes de un diccionario en general
     def get_messages_from_topic(self,topic_name):
         with open('message_queue.json') as f:
             data = json.load(f)
         return data[topic_name]
 
-#esto es para coger un mensaje en particular de la cola y enviarlo a un usuario
-    '''PAULI REVISA ESTO
-    def get_message(self, position):
-        if position < 0 or position >= len(self.topic_queue):
-            raise IndexError("Index out of range")
-        return self.topic_queue[position]
-    '''
-#el usuario solicita el mensaje de la cola de su interes 
-    def message_request(self, dictionary, position):
+
+#el usuario solicita el mensaje del diccionario en la posición 0 de la llave de cada usuario
+    def message_request(self, dictionary):
         if dictionary.is_empty():
             return "La cola está vacía"
-        # Obtener el elemento de la cola en x posición
-        #Revisa la lista 52
-        #message = self.get_message(position)
-        message='a'
+        with open('message_queue.json') as f:
+            data = json.load(f)
+#cambiar por el nombre del tópico
+            message= data.get(dictionary.message_queue[0], '')
         dictionary.dequeue(message)
+        self.save_to_file('queue_back.json')
         return message
     
 #para términos de persistencia se guardarán los datos en un .json
     def save_to_file(self, queue_back):
-        #se crea otro diccionario para guardar los datos que tiene la cola y el diccionario 
-        queue_data = {'queues': self.dictionary, 'dictionary': self.dictionary}
         with open(queue_back, 'w') as f:
-            json.dump(queue_data, f,indent=4)
+            json.dump(self.dictionary, f,indent=4)
             print("Datos guardados en el archivo", queue_back)
 
 
 #acá se carga al programa los datos que se habian guardado en el json
     def load_from_file(self, queue_back):
             with open(queue_back, 'r') as f:
-                queue_data = json.load(f)
-                self.dictionary = queue_data['queues']
-                self.dictionary = queue_data['dictionary']
+                self.dictionary= json.load(f)
             print("Datos cargados del archivo", queue_back)
 
