@@ -21,7 +21,7 @@ class MessageQueue:
             self.dictionary[topic_name].append(message)
         else:
             self.dictionary[topic_name]=[message]
-        self.save_to_file("MOM/message_queue.json")
+        self.save_to_file()
         
         print(f"El mensaje: {message} ha sido agregado..... {str(self.dictionary[0])}")
 
