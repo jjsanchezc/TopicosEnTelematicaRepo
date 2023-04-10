@@ -10,11 +10,11 @@ message_broker = ''
 # exchange=''
 # username=''
 
-
+'''
 @app.route('/')
 def home():
     return render_template('home.html')
-
+'''
 
 @app.route('/login', methods=['POST'])
 def home_login():

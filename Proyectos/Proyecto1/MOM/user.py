@@ -48,6 +48,16 @@ class User:
             json.dump(data, f, indent=4)
         return data
     
+    # Verifica si el usuario ya está registrado
+    def is_registered(self):
+        with open(self.accounts_file_path, 'r') as f:
+            data = json.load(f)
+        if self.username in data:
+            return True
+        else:
+            return False
+        
+        
     # establish a connection TO THE SERVER
     def connect(self):
         # send a POST request to the server to establish a connection
@@ -88,7 +98,40 @@ class User:
             raise ConnectionError("Not currently connected to server")
         
 
-# Pregunta en consola al usuario los sig parametros 
+# Pregunta al usuario si ya está registrado
+username = input("Enter username: ")
+user = User(username, '', '', [], [])
+
+if user.is_registered():
+    print(f"Welcome back, {username}!")
+else:
+    password = input("Enter password: ")
+    role = input("Enter your role (publisher, subscriber, or publisher-subscriber): ")
+
+    if role == "publisher" or role == "publisher-subscriber":
+        publisher_topics = input("Enter publisher topics (use comma): ").split(",")
+    else:
+        publisher_topics = []
+
+    if role == "subscriber" or role == "publisher-subscriber":
+        subscriber_topics = input("Enter subscriber topics (use comma): ").split(",")
+    else:
+        subscriber_topics = []
+
+    # Crea un nuevo objeto de usuario y lo registra
+    user = User(username, password, role, publisher_topics, subscriber_topics)
+    accounts = user.register()
+
+    # verifica que el usuario si este en el archivo de accounts.json
+    assert username in accounts
+    assert accounts[username][0]["password"] == password
+    assert accounts[username][0]["role"] == role
+    assert accounts[username][0]["publisher_topics"] == publisher_topics
+    assert accounts[username][0]["subscriber_topics"] == subscriber_topics
+    print("User registration test passed successfully!")
+
+
+'''# Pregunta en consola al usuario los sig parametros 
 username = input("Enter username: ")
 password = input("Enter password: ")
 role = input("Enter your role (publisher, subscriber, or publisher-subscriber): ")
@@ -115,7 +158,7 @@ assert accounts[username][0]["publisher_topics"] == publisher_topics
 assert accounts[username][0]["subscriber_topics"] == subscriber_topics
 
 print("User registration test passed successfully!")
-
+'''
 
 
 '''class User:
