@@ -37,9 +37,12 @@ class MessageQueue:
 
 #metodo para recibir los mensajes de un diccionario en general
     def get_messages_from_topic(self,topic_name):
-        with open('message_queue.json') as f:
+        with open('MOM/message_queue.json') as f:
             data = json.load(f)
-        return data[topic_name]
+        try:
+            return data[topic_name]
+        except:
+            return "No eres subscriptor o no existe el topico"
 
 
 #el usuario solicita el mensaje del diccionario en la posición 0 de la llave de cada usuario

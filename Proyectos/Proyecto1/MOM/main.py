@@ -103,13 +103,12 @@ def menu_publisher_choice():
 
 @app.route('/menu/publisher/topics/add_topic/', methods=['POST'])
 def add_topic():
-
     # cambiamos esto por un json?
     # PRUEBA
     username = "JJ"
     publisher_topics, subscriber_topics = get_topics(username)
     exchange = Exchange(publisher_topics, subscriber_topics)
-
+    #FIN PRUEBA
     topic_name = request.json["topic_name"]
     if exchange.create_topic(username, topic_name):
         exchange.get_name_pub_topic_list()
@@ -117,6 +116,17 @@ def add_topic():
     exchange.get_name_pub_topic_list()
     return jsonify({'message': 'error al crear el topico'})
 
+@app.route('/menu/publisher/topics/rm_topic/', methods=['POST'])
+def rm_topic():
+    # PRUEBA
+    username = "JJ"
+    publisher_topics, subscriber_topics = get_topics(username)
+    exchange = Exchange(publisher_topics, subscriber_topics)
+    #FIN PRUEBA
+    topic_name=input('cual es el nombre del topico que quieres borrar?: ')
+    if exchange.delete_topic(username,topic_name):
+        return f'topico eliminado, topicos que tienes: {get_topics(username)[0][0]}'
+    return f'No se pudo eliminar el topico{topic_name}, topicos disponibles: {get_topics(username)}'
 
 @app.route('/menu/publisher/topics', methods=['GET'])
 def see_topics_pub():
@@ -134,7 +144,7 @@ def send_message(topic_name):
     username = "JJ"
     publisher_topics, subscriber_topics = get_topics(username)
     exchange = Exchange(publisher_topics, subscriber_topics)
-
+    #FIN PRUEBA
     message = input('mensaje a mandar: ')
     try:
         exchange.publish_message(message, topic_name)
@@ -150,16 +160,41 @@ def send_message(topic_name):
         return jsonify({'mensaje': 'Mensaje enviado correctamente para los subscriptores de '+topic_name})'''
 
 
-# Ruta para recibir un mensaje
-@app.route('/mensaje', methods=['GET'])
-def recibir_mensaje():
+#SUBSCRIBER
+@app.route('/subscriber/subscribe', methods=['POST'])
+def subscribe():
     # PRUEBA
     username = "jjs"
     publisher_topics, subscriber_topics = get_topics(username)
     exchange = Exchange(publisher_topics, subscriber_topics)
+    #FIN PRUEBA
+    topic_name=input('topico al que quieres suscribirte: ')
+    return exchange.subscribe(username,topic_name)
+    
+
+@app.route('/subscriber/unsubscribe', methods=['POST'])
+def unsubscribe():
+    # PRUEBA
+    username = "jjs"
+    publisher_topics, subscriber_topics = get_topics(username)
+    exchange = Exchange(publisher_topics, subscriber_topics)
+    #FIN PRUEBA
+    topic_name=input('escribe el topico al cual quieras darte de baja: ')
+    subscribed_topics=get_topics(username)[1][0]
+    print(f'metodos de los que puedes darte de baja {subscribed_topics}')
+    return exchange.unsubscribe(username,topic_name)
+
+# Ruta para recibir un mensaje
+@app.route('/mensaje', methods=['GET'])
+def get_message():
+    # PRUEBA
+    username = "jjs"
+    publisher_topics, subscriber_topics = get_topics(username)
+    exchange = Exchange(publisher_topics, subscriber_topics)
+    #FIN PRUEBA
     print(exchange.get_name_sub_topic_list())
     topic_name = input('de cual topico quieres buscar mensajes')
-    exchange.get_messages(topic_name)
+    return exchange.get_messages(topic_name)
 
 
 def get_topics(username):
