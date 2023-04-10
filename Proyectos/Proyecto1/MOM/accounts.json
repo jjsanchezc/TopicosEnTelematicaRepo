@@ -132,5 +132,15 @@
             ],
             "subscriber_topics": []
         }
+    ],
+    "pod": [
+        {
+            "username": "pod",
+            "password": "221",
+            "publisher_topics": [
+            ],
+            "subscriber_topics": [
+            ]
+        }
     ]
 }
