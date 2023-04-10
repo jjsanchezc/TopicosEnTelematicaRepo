@@ -4,7 +4,9 @@ class MessageQueue:
     def __init__(self):
         # Creación de colas
         #para cada tópico una cola
-        self.dictionary={}
+        with open('MOM/message_queue.json') as f:
+            data = json.load(f)
+        self.dictionary=data
 
 #Determina si las colas están vacias (False) o no (True)
     def is_empty(self):
@@ -14,12 +16,15 @@ class MessageQueue:
     def enqueue(self, message,topic_name):
         #buscar otro metodo para agregar en un diccionario
         #self.dictionary.append(message)
-        if message in self.dictionary:
+        print(f'queue, este es el mensaje que recibi {message} y lo guardo en {topic_name}')
+        if topic_name in self.dictionary:
             self.dictionary[topic_name].append(message)
         else:
-            self.dictionary[topic_name] = [message]
-        self.save_to_file("message_queue.json")
-        print(f"El mensaje: {message} ha sido agregado")
+            self.dictionary[topic_name]=[message]
+        #print(f"El mensaje: {message} ha sido agregado..... {str(self.dictionary[0])}")
+        self.save_to_file("MOM/message_queue.json")
+        
+        print(f"El mensaje: {message} ha sido agregado..... {str(self.dictionary[0])}")
 
 #elimina y devuelve con el pop el elemento de la cola
     def dequeue(self, message):
@@ -57,10 +62,11 @@ class MessageQueue:
 #para términos de persistencia se guardarán los datos en un .json
     def save_to_file(self, queue_back):
         #se crea otro diccionario para guardar los datos que tiene la cola y el diccionario 
-        queue_data = {'queues': self.dictionary, 'dictionary': self.dictionary}
+        queue_data = self.dictionary
+        print(f'queue_data= {queue_data}')
         with open(queue_back, 'w') as f:
             json.dump(queue_data, f,indent=4)
-            print("Datos guardados en el archivo", queue_back)
+            return print("Datos guardados en el archivo", queue_back)
 
 
 #acá se carga al programa los datos que se habian guardado en el json

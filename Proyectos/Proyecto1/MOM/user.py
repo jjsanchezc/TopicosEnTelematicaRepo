@@ -18,7 +18,7 @@ class User:
         elif role == 'publisher-subscriber':
             self.publisher_topics = publisher_topics or []
             self.subscriber_topics = subscriber_topics or []
-        self.accounts_file_path = "accounts.json"
+        self.accounts_file_path = "MOM/accounts.json"
         self.session_id = None
         self.server_url = "http://127.0.0.1:5000"  # replace with actual server URL
 
