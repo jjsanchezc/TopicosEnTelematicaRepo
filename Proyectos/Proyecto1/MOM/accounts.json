@@ -137,8 +137,11 @@
         {
             "username": "pod",
             "password": "221",
+            "role": "subscriber",
             "publisher_topics": [],
-            "subscriber_topics": []
+            "subscriber_topics": [
+                "topic1"
+            ]
         }
     ]
 }
