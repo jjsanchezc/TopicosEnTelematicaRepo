@@ -50,11 +50,11 @@
         {
             "username": "majo",
             "password": "1234",
-            "role": "subscriber",
-            "publisher_topics": [],
-            "subscriber_topics": [
-                "jk"
-            ]
+            "role": "publisher",
+            "publisher_topics": [
+                "kan"
+            ],
+            "subscriber_topics": []
         }
     ],
     "majo1": [
@@ -137,10 +137,8 @@
         {
             "username": "pod",
             "password": "221",
-            "publisher_topics": [
-            ],
-            "subscriber_topics": [
-            ]
+            "publisher_topics": [],
+            "subscriber_topics": []
         }
     ]
 }

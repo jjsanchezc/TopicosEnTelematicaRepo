@@ -56,7 +56,6 @@ def menu():
     else:
         return redirect('/login')
 
-
 '''    return 'hola, decide que quieres ser'''
 
 
