@@ -23,7 +23,7 @@ class MessageQueue:
             self.dictionary[topic_name]=[message]
         self.save_to_file()
         
-        print(f"El mensaje: {message} ha sido agregado..... {str(self.dictionary[0])}")
+        return f"El mensaje: {message} ha sido enviado"
 
 #elimina y devuelve con el pop el elemento de la cola
     def dequeue(self, message):
@@ -59,9 +59,9 @@ class MessageQueue:
 #para términos de persistencia se guardarán los datos en un .json
     def save_to_file(self):
         #se crea otro diccionario para guardar los datos que tiene la cola y el diccionario 
+        queue_data =self.dictionary
         with open('MOM/message_queue.json', 'w') as f:
-            data = json.load(f)
-            json.dump(data, f,indent=4)
+            json.dump(queue_data, f,indent=4)
             print("Datos guardados en el archivo")
 
 

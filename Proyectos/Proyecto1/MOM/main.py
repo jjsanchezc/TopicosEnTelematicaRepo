@@ -123,7 +123,8 @@ def rm_topic():
     publisher_topics, subscriber_topics = get_topics(username)
     exchange = Exchange(publisher_topics, subscriber_topics)
     #FIN PRUEBA
-    topic_name=input('cual es el nombre del topico que quieres borrar?: ')
+    #topic_name=input('cual es el nombre del topico que quieres borrar?: ')
+    topic_name=request.json["topic_name"]
     if exchange.delete_topic(username,topic_name):
         return f'topico eliminado, topicos que tienes: {get_topics(username)[0][0]}'
     return f'No se pudo eliminar el topico{topic_name}, topicos disponibles: {get_topics(username)}'
@@ -145,19 +146,10 @@ def send_message(topic_name):
     publisher_topics, subscriber_topics = get_topics(username)
     exchange = Exchange(publisher_topics, subscriber_topics)
     #FIN PRUEBA
-    message = input('mensaje a mandar: ')
-    try:
-        exchange.publish_message(message, topic_name)
-        return jsonify({"mensaje": "mensaje enviado correctamente"})
-    except:
-        return jsonify({"mensaje": "error en el mensaje"})
-    '''if user.send_message(topic_name) is False:
-        return jsonify({'mensaje': 'Error al enviar, topico no existe','a': str(user.my_topics_pub)})
-    else:
-        message=request.json['mensaje']
-        add_queue(message)
-        
-        return jsonify({'mensaje': 'Mensaje enviado correctamente para los subscriptores de '+topic_name})'''
+    #message = input('mensaje a mandar: ')
+    
+    message=str(request.json["message"])
+    return exchange.publish_message(message, topic_name)
 
 
 #SUBSCRIBER
@@ -168,7 +160,8 @@ def subscribe():
     publisher_topics, subscriber_topics = get_topics(username)
     exchange = Exchange(publisher_topics, subscriber_topics)
     #FIN PRUEBA
-    topic_name=input('topico al que quieres suscribirte: ')
+    #topic_name=input('topico al que quieres suscribirte: ')
+    topic_name=topic_name=request.json["topic_name"]
     return exchange.subscribe(username,topic_name)
     
 
@@ -179,7 +172,8 @@ def unsubscribe():
     publisher_topics, subscriber_topics = get_topics(username)
     exchange = Exchange(publisher_topics, subscriber_topics)
     #FIN PRUEBA
-    topic_name=input('escribe el topico al cual quieras darte de baja: ')
+    #topic_name=input('escribe el topico al cual quieras darte de baja: ')
+    topic_name=topic_name=request.json["topic_name"]
     subscribed_topics=get_topics(username)[1][0]
     print(f'metodos de los que puedes darte de baja {subscribed_topics}')
     return exchange.unsubscribe(username,topic_name)
@@ -193,7 +187,8 @@ def get_message():
     exchange = Exchange(publisher_topics, subscriber_topics)
     #FIN PRUEBA
     print(exchange.get_name_sub_topic_list())
-    topic_name = input('de cual topico quieres buscar mensajes')
+    #topic_name = input('de cual topico quieres buscar mensajes')
+    topic_name=topic_name=request.json["topic_name"]
     return exchange.get_messages(topic_name)
 
 

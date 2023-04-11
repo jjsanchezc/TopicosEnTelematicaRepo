@@ -64,7 +64,7 @@ class Exchange:
             message (str): message to send
             topic_name (str): topic name
         '''
-        self.topics.add_message(message,topic_name)
+        return self.topics.add_message(message,topic_name)
         
     #METHODS FOR SUBSCRIBERS
     def get_name_sub_topic_list(self):
