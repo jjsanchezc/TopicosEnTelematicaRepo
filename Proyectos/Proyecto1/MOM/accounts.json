@@ -49,10 +49,10 @@
     "majo": [
         {
             "username": "majo",
-            "password": "1234",
+            "password": "134",
             "role": "publisher",
             "publisher_topics": [
-                "kan"
+                "lsk"
             ],
             "subscriber_topics": []
         }
