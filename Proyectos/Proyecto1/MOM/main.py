@@ -104,7 +104,7 @@ def menu_publisher_choice():
 def add_topic():
     # cambiamos esto por un json?
     # PRUEBA
-    username = "JJ"
+    username = request.json["username"]
     publisher_topics, subscriber_topics = get_topics(username)
     exchange = Exchange(publisher_topics, subscriber_topics)
     #FIN PRUEBA
@@ -118,7 +118,7 @@ def add_topic():
 @app.route('/menu/publisher/topics/rm_topic/', methods=['POST'])
 def rm_topic():
     # PRUEBA
-    username = "JJ"
+    username = request.json["username"]
     publisher_topics, subscriber_topics = get_topics(username)
     exchange = Exchange(publisher_topics, subscriber_topics)
     #FIN PRUEBA
@@ -131,7 +131,7 @@ def rm_topic():
 @app.route('/menu/publisher/topics', methods=['GET'])
 def see_topics_pub():
     # PRUEBA
-    username = "JJ"
+    username = request.json["username"]
     publisher_topics, subscriber_topics = get_topics(username)
     exchange = Exchange(publisher_topics, subscriber_topics)
     #FIN PRUEBA
@@ -141,7 +141,7 @@ def see_topics_pub():
 @app.route('/menu/publisher/message/<topic_name>', methods=['POST'])
 def send_message(topic_name):
     # PRUEBA
-    username = "JJ"
+    username = request.json["username"]
     publisher_topics, subscriber_topics = get_topics(username)
     exchange = Exchange(publisher_topics, subscriber_topics)
     #FIN PRUEBA
@@ -155,7 +155,7 @@ def send_message(topic_name):
 @app.route('/subscriber/subscribe', methods=['POST'])
 def subscribe():
     # PRUEBA
-    username = "jjs"
+    username = request.json["username"]
     publisher_topics, subscriber_topics = get_topics(username)
     exchange = Exchange(publisher_topics, subscriber_topics)
     #FIN PRUEBA
@@ -167,7 +167,7 @@ def subscribe():
 @app.route('/subscriber/unsubscribe', methods=['POST'])
 def unsubscribe():
     # PRUEBA
-    username = "jjs"
+    username = request.json["username"]
     publisher_topics, subscriber_topics = get_topics(username)
     exchange = Exchange(publisher_topics, subscriber_topics)
     #FIN PRUEBA
@@ -178,16 +178,14 @@ def unsubscribe():
     return exchange.unsubscribe(username,topic_name)
 
 # Ruta para recibir un mensaje
-@app.route('/mensaje', methods=['GET'])
-def get_message():
+@app.route('/mensaje/<topic_name>', methods=['GET'])
+def get_message(topic_name):
     # PRUEBA
-    username = "jjs"
+    username = request.json["username"]
     publisher_topics, subscriber_topics = get_topics(username)
     exchange = Exchange(publisher_topics, subscriber_topics)
     #FIN PRUEBA
     print(exchange.get_name_sub_topic_list())
-    #topic_name = input('de cual topico quieres buscar mensajes')
-    topic_name=topic_name=request.json["topic_name"]
     return exchange.get_messages(topic_name)
 
 
