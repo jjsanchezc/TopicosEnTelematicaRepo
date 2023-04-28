@@ -3,13 +3,11 @@
         {
             "username": "JJ",
             "password": "1234",
+            "role": "publisher",
             "publisher_topics": [
-                "JJ_Musica",
-                "JJ_arte"
+                ""
             ],
-            "subscriber_topics": [
-                "jjs_MUSICA"
-            ]
+            "subscriber_topics": []
         }
     ],
     "jjs": [
@@ -49,10 +47,10 @@
     "majo": [
         {
             "username": "majo",
-            "password": "1234",
+            "password": "134",
             "role": "publisher",
             "publisher_topics": [
-                "kan"
+                "lsk"
             ],
             "subscriber_topics": []
         }
@@ -63,7 +61,9 @@
             "password": "1234",
             "role": "publisher",
             "publisher_topics": [
-                "topic"
+                "topic",
+                "majo1_carritos",
+                "majo1_carro"
             ],
             "subscriber_topics": []
         }
@@ -142,6 +142,17 @@
             "subscriber_topics": [
                 "topic1"
             ]
+        }
+    ],
+    "jjsanc": [
+        {
+            "username": "jjsanc",
+            "password": "c",
+            "role": "publisher",
+            "publisher_topics": [
+                ""
+            ],
+            "subscriber_topics": []
         }
     ]
 }
