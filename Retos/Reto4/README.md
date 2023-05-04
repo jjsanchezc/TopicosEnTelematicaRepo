@@ -120,6 +120,53 @@ kk
 <div id='Instancia'>
 
 ## Configuración de Instancia
-
-
+Se inicia la instancia 
+ 
+```
+ sudo apt update
+sudo apt install docker.io -y
+sudo apt install docker-compose -y
+ sudo systemctl enable docker
+sudo systemctl start docker
+```
+ Se abre el docker-compose.yml
+ ```
+sudo nano docker-compose.yml
+ ```
+  esto es lo que se ve al abrir el docker-compose:
+ 
+ ![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103793035617259631/image.png)
+ 
+Como se puede ver, tenemos el endpoint del RDS como host para nuestra base de datos, tambien comparte el nombre con el RDS, con esta configuración ya está conectandose a la base de datos creada con RDS. 
+ Tambien se puede evidenciar en la ultima linea de volumenes se escribió  /mnt/moodle:/var/www/html para decir que en esta ruta habrá una carpeta de archivos compartidos 
+ 
+ 
+ Despues de cerrar el docker-compose.yml se hace el siguiente comando para correrlo 
+  ```
+ sudo docker-compose up
+  ```
+luego:
+```
+sudo apt-get -y update
+sudo apt-get -y install nfs-common
+sudo mkdir -p /mnt/moodle
+sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-04d475e35629ec77a.efs.us-east-1.amazonaws.com:/ /mnt/moodle
+```
+Al escribir:
+ ```
+ df -h
+ ```
+muestra: 
+ 
+ ![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103797059145961482/image.png)
+ 
+ Se ejecuta:
+```
+ sudo nano /etc/fstab
+fs-04d475e35629ec77a.efs.us-east-1.amazonaws.com:/ /mnt/moodle nfs4 default 0 0
+```
+ 
+ 
+ 
+ 
 ***
