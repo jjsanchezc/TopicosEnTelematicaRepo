@@ -11,56 +11,93 @@
 1. [Introducción](#Introduccion)
 2. [Estrucutra](#Estructura)
 3. [AWS](#AWS)
-4. [Security Groups](#Security)
-5. [EFS](#EFS)
-6. [RDS](#RDS)
-7. [AMI](#AMI)
-8. [Instance Template](#Template)
-9. [Target Groups](#Target)
-10. [LoadBalancer](#LoadBalancer)
-11. [Autoscaling Groups](#Autoscaling)
+ 3.4. [Security Groups](#Security)
+ 3.5. [EFS](#EFS)
+ 3.6. [RDS](#RDS)
+ 3.7. [AMI](#AMI)
+ 3.8. [Instance Template](#Template)
+ 3.9. [Target Groups](#Target)
+ 3.10. [LoadBalancer](#LoadBalancer)
+ 3.11. [Autoscaling Groups](#Autoscaling)
+4. [Instancia](#Instancia)
 <br>
 
 ***
 
 <div id='Introduccion'>
-kk
+
+## 1 Introducción
 
 ***
 
 <div id='Estructura'/>
-imagen del dc
+
+## 2 Estructura
+
+![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103778710496215141/image.png)
 
 ***
 
 <div id='AWS'/>
-imagen del dc
+
+## 3 AWS
+En esta sección se mostrará la configuración de cada una de las tecnologías que se usaron para poder realizar este reto
 
 ***
 
 
 <div id='Security'/>
-imagen del dc
+
+## 3.1 Security Groups
+
+En las siguientes imagenes se muestra el proceso para la creación de los Security groups
+![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103753186432528505/image.png)
+
+en la primera imagen podemos ver como se configuran los puertos necesarios para poder usar HTTP, HTTPS y SSH. Tambien permitimos el trafico de todas partes sin restrcción alguna
+
+![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103753400446894190/image.png)
+
+Despues creamos un Security group para el EFS para permitir el acceso al purto 2049, la diferencia con el otro grupo es que en este grupo la destinación va directamente a las instancias que tengan el primer security group
 
 ***
 
 <div id='EFS'/>
-imagen del dc
+
+## 3.2 EFS
+
+
+![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103753767779844217/image.png)
+
+Se da el nombre al EFS y luego se crea el EFS
+
+![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103754007064871053/image.png)
+
+![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103754045530853376/image.png)
+
+Despues se tiene que entrar a la configuración del EFS, esto mostrará todas las availability zones con sus Security Groups, AWS no configura automaticamente los Security groups que creamos con el EFS, por lo tanto toca buscar y seleccionarlos
+
+
+
 
 ***
 
 <div id='RDS'/>
-imagen del dc
+
+## 2.3 RDS
+
+![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103777289390526474/image.png)
 
 ***
 
 <div id='AMI'/>
-imagen del dc
+
+## 3.4 AMI
 
 ***
 
 <div id='Template'/>
-imagen del dc
+
+## 3.5 Instance Template
 
 ***
 
@@ -77,5 +114,12 @@ kk
 
 <div id='Autoscaling'>
 kk
+
+***
+
+<div id='Instancia'>
+
+## Configuración de Instancia
+
 
 ***
