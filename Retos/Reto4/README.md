@@ -27,21 +27,23 @@
 <div id='Introduccion'>
 
 ## 1 Introducción
-
+ 
+El objetivo de este reto es migrar, re-diseñar e implementar la aplicación Moodle en un ambiente escalable y robusto que garantice la alta disponibilidad y rendimiento requeridos por la universidad. Para ello, se utilizarán los servicios administrados de AWS
 ***
 
 <div id='Estructura'/>
 
 ## 2 Estructura
 
-![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103778710496215141/image.png)
+ Una aproximación cercana a nuestro trabajo:
+![image]([https://cdn.discordapp.com/attachments/1101910712651096197/1103778710496215141/image.png](https://cdn.discordapp.com/attachments/1101910712651096197/1103750661406990396/image.png))
 
 ***
 
 <div id='AWS'/>
 
 ## 3 AWS
-En esta sección se mostrará la configuración de cada una de las tecnologías que se usaron para poder realizar este reto
+En esta sección se mostrará la configuración de cada una de las tecnologías de AWS que se usaron para poder realizar este reto
 
 ***
 
@@ -83,9 +85,24 @@ Despues se tiene que entrar a la configuración del EFS, esto mostrará todas la
 
 <div id='RDS'/>
 
-## 2.3 RDS
+## 3.3 RDS
 
-![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103777289390526474/image.png)
+ Para la creación de la base de datos en RDS es completar las opciones que nos pide el AWS, en este caso base de datos MySQL y Template Free tier, seguimos con la info de las imagenes:
+![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103755234188198098/image.png)
+ ![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103755292631629885/image.png)
+ ![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103755339935002657/image.png)
+ ![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103755387078967507/image.png)
+ 
+ Seleccionamos el Security group que creamos:
+ 
+  ![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103755427902132274/image.png)
+ ![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103755469832593449/image.png)
+ 
+ El resultado debería quedar así: 
+ 
+  ![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103777289390526474/image.png)
+ 
+ Nota: el Endpoint nos servirá para la conexión
 
 ***
 
@@ -102,19 +119,47 @@ Despues se tiene que entrar a la configuración del EFS, esto mostrará todas la
 ***
 
 <div id='Target'/>
-imagen del dc
 
+ ## 3.6 Target
+ 
+ La configuración de esta es corta, simplemente se define que se quiere crear un target group de instancias y se le da el nombre y el puerto 
+ ![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103807186360074260/image.png)
+ ![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103807420741992488/image.png)
 ***
 
 <div id='LoadBalancer'>
-kk
+
+ ## 3.7 Load Balancer
+ 
+ Para la confiugración del Load Balancer se configura como Application Load Balancer 
+ ![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103808021873823785/image.png)
+ Algo a resaltar es que se activan todos los mappings para que el balanceador de cargas funcione en todas las subredes posibles.
+ ![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103807648543015012/image.png)
+ ![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103807757141942452/image.png)
+ Se seleccionan los security groups que se crearon y se configura que el puerto 80 haga un fordward to al target group que creamos
+ ![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103807850091917363/image.png)
+ 
+ 
 
 ***
 
 
 <div id='Autoscaling'>
-kk
 
+ ## 3.8 Autoscaling group
+
+Para el proceso de la configuración del autoscaling group, es muy sencillo, como se ve en la imagen, seleccionamos el template creado:
+ ![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103808250194972703/image.png)
+ 
+Luego llamamos al VPC y a las Availability Zones
+ ![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103808401248628827/image.png)
+ 
+ Para la configuración del Load balancer, damos la opción para escoger el load balancer target groups y seleccionamos el que creamos anteriormente
+ ![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103808627095109733/image.png)
+ 
+Lo ultimo en configurar son los Scaling policies, en este se colocará que al momento de que se utilice el 50% de la CPU se aumente automaticamente el numero de instancias
+ ![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103809019715526676/image.png)
+ 
 ***
 
 <div id='Instancia'>
@@ -145,7 +190,7 @@ Como se puede ver, tenemos el endpoint del RDS como host para nuestra base de da
   ```
  sudo docker-compose up
   ```
-luego:
+luego los siguientes comandos son para montar el nfs y conectarlo con AWS:
 ```
 sudo apt-get -y update
 sudo apt-get -y install nfs-common
