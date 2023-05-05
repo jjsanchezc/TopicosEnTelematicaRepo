@@ -2,7 +2,7 @@
 **Curso:** Tópicos Especiales en Telemática <br>
 **Título:** <br>
 **Autores:** Juan José Sánchez Cortés - Estudiante de la Universidad EAFIT - [jjsanchezc](https://gist.github.com/jjsanchezc) <br>
- Jose Manuel Fonseca -
+ Jose Manuel Fonseca -Estudiante de la Universidad EAFIT - [jmfonsecap](https://gist.github.com/jmfonsecap) <br>
 
 ***
 
