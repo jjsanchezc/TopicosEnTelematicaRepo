@@ -110,12 +110,76 @@ Despues se tiene que entrar a la configuración del EFS, esto mostrará todas la
 <div id='AMI'/>
 
 ## 3.4 AMI
+Se crea una instancia en EC2 con una imagen de Ubuntu 22.04 con las siguientes configuraciones:
+![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103778710496215141/image.png)
+![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103778790896836718/image.png)
+Se utiliza el segurity group reto4-sg creado previamente
+![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103778873335873687/image.png)
+Luego se ingresa a la instancia y se corren los siguientes comandos:
+```sh
+$sudo apt update
+$sudo apt install docker.io -y
+$sudo apt install docker-compose -y
 
+$sudo systemctl enable docker
+$sudo systemctl start docker
+```
+Estos comandos son para actualizar el docker
+Luego procedemos instalar el docker de moodle con los siguientes comandos:
+```sh
+ $ sudo nano docker-compose.yml
+```
+Esto creara un archivo docker compose vacio en el cual agregaremos lo siguiente 
+![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103793035617259631/image.png)
+Luego subimos el docker
+```sh
+ $ sudo docker-compose up
+```
+Verificamos que este corriendo en la instancia, y cuando lo hagamos procedemos a settear el EFS en la instancia.
+Esto se hace con los siguientes comandos:
+```sh
+ $sudo apt-get -y update
+ $sudo apt-get -y install nfs-common
+ $sudo mkdir -p /mnt/moodle
+ $sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-04d475e35629ec77a.efs.us-east-1.amazonaws.com:/ /mnt/moodle
+```
+Esto permitira instalar el nfs-common en el cliente. Luego crea una carpeta con el nombre /mnt/moodle y luego se hace el mount y se enlaza la carpeta en con el efs-server.
+
+Luego corremos el comando
+```sh
+ $df -h
+```
+Para verificar que se haya montado correctamente y deberiamos ver esto:
+![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103797059145961482/image.png)
+```sh
+ $sudo nano /etc/fstab
+```
+![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103798354816815205/image.png)
+Deberia aparecer este archivo y se agregara la linea:
+```sh
+ fs-04d475e35629ec77a.efs.us-east-1.amazonaws.com:/ /mnt/moodle nfs4 default 0 0
+```
+Para que asi se monte el efs immediatamente se cree la instancia.
+Ya podemos cerrar la instancia.
+Luego, le damos click derecho a la instancia y creamos una imagen a partir de esta.
+![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103799683740086302/image.png)
+La creamos con las siguientes configuracione
+![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103805887317024818/image.png)
 ***
 
 <div id='Template'/>
 
 ## 3.5 Instance Template
+
+Ya luego procedemos a crear el template, es una configuración corta ya que la mayor parte de esta estuvo incluida en la creación de la imagen.
+Primero nos dirigimos a launch template y le damos a crear. Nos deberia salir una ventana la cual configuraremos con la siguiente información:
+![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103806251084812318/image.png)
+Luego damos click en My AMIs, seleccionamos la opción "owned by me" y seleccionamos la imagen creada.
+![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103806374695153755/image.png)
+Luego seguimos con las siguientes configuraciones
+![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103806533470519357/image.png)
+Ya por ultimo, configuramos el grupo de seguridad para que sea el mismo que habiamos seleccionado previamente.
+![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103806611094511667/image.png)
 
 ***
 
