@@ -36,6 +36,7 @@ El objetivo de este reto es migrar, re-diseñar e implementar la aplicación Moo
 ## 2 Estructura
 
  Una aproximación cercana a nuestro trabajo:
+ 
 ![image](https://cdn.discordapp.com/attachments/1101910712651096197/1103750661406990396/image.png)
 
 ***
